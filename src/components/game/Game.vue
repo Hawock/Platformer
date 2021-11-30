@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import config from '@/game/config'
+import GameScene from '@/game/scenes/GameScene'
+import Phaser from "phaser"
 
 export default {
   name: 'Game',
@@ -24,7 +25,7 @@ export default {
     this.game = await import('@/game/main')
     this.downloaded = true
     this.$nextTick(() => {
-      this.gameInstance = this.game.launch(this.containerId, config)
+      this.gameInstance = this.game.launch(this.containerId, this.config)
     })
   },
   unmounted() {
@@ -32,6 +33,17 @@ export default {
   },
   methods: {
 
+  },
+  computed: {
+    config() {
+      const gameScene = new GameScene()
+      return {
+        type: Phaser.AUTO,
+        width: 1280,
+        height: 720,
+        scene: [gameScene],
+      }
+    }
   }
 }
 </script>
