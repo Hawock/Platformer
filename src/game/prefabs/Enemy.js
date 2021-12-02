@@ -7,6 +7,12 @@ export default class Enemy extends GameObjects.Sprite {
         this.init()
     }
 
+    static generate(scene) {
+        const x = config.width + 200
+        const y = Phaser.Math.Between(100, config.height -100)
+        return new Enemy(scene, x, y, 'enemy', `enemy${Phaser.Math.Between(1, 4)}`)
+    }
+
     init(){
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)

@@ -2,6 +2,7 @@ import {Scene, Utils} from 'phaser'
 import config from '@/game/config'
 import Player from '@/game/prefabs/Player'
 import Enemy from '@/game/prefabs/Enemy'
+import Enemies from '@/game/prefabs/Enemies'
 
 export default class GameScene extends Scene {
     constructor() {
@@ -13,12 +14,16 @@ export default class GameScene extends Scene {
         this.createBackground()
         this.cursors = this.input.keyboard.createCursorKeys()
         this.createPlayer()
-        this.createEnemy()
+        this.enemies = new Enemies(this)
+        this.enemies.createEnemy()
+        this.enemies.createEnemy()
+        this.enemies.createEnemy()
+
     }
 
     update(){
         this.player.move()
-        this.enemy.move()
+        //this.enemy.move()
         this.bg.tilePositionX += 0.5
     }
 
@@ -30,7 +35,6 @@ export default class GameScene extends Scene {
         this.player = new Player(this)
     }
 
-    createEnemy() {
-        this.enemy = new Enemy(this, config.width - 150, config.height / 2, 'enemy', 'enemy1')
-    }
+
+
 }
