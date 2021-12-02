@@ -2,6 +2,8 @@ import {Scene, Utils} from 'phaser'
 import background from '@/game/assets/sprites/background.png'
 import dragonAtlas from '@/game/assets/sprites/dragon.png'
 import dragonAtlasJSON from '@/game/assets/sprites/dragon.json'
+import enemyAtlas from '@/game/assets/sprites/enemy.png'
+import enemyAtlasJSON from '@/game/assets/sprites/enemy.json'
 
 export default class PreloadScene extends Scene {
     constructor() {
@@ -11,6 +13,7 @@ export default class PreloadScene extends Scene {
     preload() {
         this.createBackground()
         this.load.atlas('dragon', dragonAtlas, dragonAtlasJSON)
+        this.load.atlas('enemy', enemyAtlas, enemyAtlasJSON)
         console.log('PreloadScene.preload')
     }
 
