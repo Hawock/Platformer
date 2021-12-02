@@ -1,14 +1,18 @@
 <template>
-  <div :id="containerId" v-if="downloaded">
+  <div  class="main-game">
+    <div :id="containerId">
 
+    </div>
   </div>
-  <div class="placeholder" v-else>
-    Downloading ...
-  </div>
+
 </template>
 
 <script>
 import GameScene from '@/game/scenes/GameScene'
+import BootScene from '@/game/scenes/BootScene'
+import PreloadScene from '@/game/scenes/PreloadScene'
+import StartScene from '@/game/scenes/StartScene'
+import gameConfig from '@/game/config'
 import Phaser from "phaser"
 
 export default {
@@ -36,13 +40,13 @@ export default {
   },
   computed: {
     config() {
+      const config = gameConfig
       const gameScene = new GameScene()
-      return {
-        type: Phaser.AUTO,
-        width: 1280,
-        height: 720,
-        scene: [gameScene],
-      }
+      const bootScene = new BootScene()
+      const preloadScene = new PreloadScene()
+      const startScene = new StartScene()
+      config.scene = [bootScene, preloadScene, startScene, gameScene]
+      return config
     }
   }
 }
@@ -53,4 +57,5 @@ export default {
   font-size: 2rem;
   font-family: 'Courier New', Courier, monospace;
 }
+
 </style>
