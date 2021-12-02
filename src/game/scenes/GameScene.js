@@ -15,15 +15,10 @@ export default class GameScene extends Scene {
         this.cursors = this.input.keyboard.createCursorKeys()
         this.createPlayer()
         this.enemies = new Enemies(this)
-        this.enemies.createEnemy()
-        this.enemies.createEnemy()
-        this.enemies.createEnemy()
-
     }
 
     update(){
         this.player.move()
-        //this.enemy.move()
         this.bg.tilePositionX += 0.5
     }
 
