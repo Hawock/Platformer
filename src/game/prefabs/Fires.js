@@ -12,7 +12,7 @@ export default class Fires extends Phaser.Physics.Arcade.Group {
             fire =  Fire.generate(this.scene, source)
             this.add(fire)
         }else{
-            fire.reset()
+            fire.reset(source.x + source.width / 2 ,source.y)
         }
         fire.move()
     }
