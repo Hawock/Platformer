@@ -1,11 +1,7 @@
 import config from '@/game/config'
-import Enemy from '@/game/prefabs/Enemy'
+import MovableObject from '@/game/prefabs/MovableObject'
 
-export default class Fire extends Phaser.GameObjects.Sprite {
-    constructor(data) {
-        super(data.scene, data.x, data.y, data.texture)
-        this.init(data)
-    }
+export default class Fire extends MovableObject {
 
     static generate(scene, source) {
         const data = {
@@ -13,22 +9,12 @@ export default class Fire extends Phaser.GameObjects.Sprite {
             x: source.x + source.x / 2,
             y: source.y,
             texture: 'fire',
-            velocity: 600
+            velocity: 700
         }
         return new Fire(data)
     }
 
-    init(data) {
-        this.scene.add.existing(this)
-        this.velocity = data.velocity
+    isDead(){
+        return this.x > config.width + this.width || this.x < -this.width
     }
-
-    move() {
-        this.body.setVelocityX(this.velocity)
-    }
-
-    reset() {
-
-    }
-
 }
