@@ -11,7 +11,8 @@ export default class PreloadScene extends Scene {
     }
 
     preload() {
-        console.log(this.load.image('fire', require('@/game/assets/sprites/fire.png')))
+        this.load.image('fire', require('@/game/assets/sprites/fire.png'))
+        this.load.image('bullet', require('@/game/assets/sprites/bullet.png'))
         this.load.atlas('dragon', dragonAtlas, dragonAtlasJSON)
         this.load.atlas('enemy', enemyAtlas, enemyAtlasJSON)
         console.log('PreloadScene.preload')

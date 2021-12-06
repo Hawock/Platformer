@@ -6,10 +6,10 @@ export default class Fire extends MovableObject {
     static generate(scene, source) {
         const data = {
             scene,
-            x: source.x + source.x / 2,
+            x: source.x,
             y: source.y,
-            texture: 'fire',
-            velocity: 700
+            texture: source.bullet.texture,
+            velocity: source.bullet.velocity
         }
         return new Fire(data)
     }
