@@ -1,11 +1,14 @@
 import Enemy from '@/game/prefabs/Enemy'
+import Fires from '@/game/prefabs/Fires'
 
 export default class Enemies extends Phaser.Physics.Arcade.Group {
     constructor(scene) {
-        super();
+        super(scene.physics.world, scene);
         this.scene = scene
-        this.countMax = 10
+        this.fires = new Fires(this.scene)
+        this.countMax =  10
         this.countCreated = 0
+        this.countKilled =  0
         this.timer = this.scene.time.addEvent({
             delay: 1000,
             loop: true,
@@ -15,23 +18,29 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     }
 
     tick() {
-        console.log('current length', this.getLength())
         if(this.countCreated < this.countMax){
             this.createEnemy()
         }else{
-            console.log('remove timer')
             this.timer.remove()
+
+        }
+    }
+
+    onEnemyKilled(){
+        ++this.countKilled
+        console.log(this.countKilled, '/', this.countMax)
+        if(this.countKilled >= this.countMax){
+            this.scene.events.emit('enemies-killed')
         }
     }
 
     createEnemy() {
         let enemy = this.getFirstDead()
         if(!enemy){
-            console.log('Create new enemy')
-            enemy = Enemy.generate(this.scene)
+            enemy = Enemy.generate(this.scene, this.fires)
+            enemy.on('died', this.onEnemyKilled, this)
             this.add(enemy)
         }else{
-            console.log('Reset existing enemy')
             enemy.reset()
         }
         this.countCreated++

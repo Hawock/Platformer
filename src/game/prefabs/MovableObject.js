@@ -20,20 +20,26 @@ export default class MovableObject extends Phaser.GameObjects.Sprite {
         this.setAlive(true)
     }
 
-    isDead(){
+    isDead() {
         return false
     }
 
     update() {
-        if(this.active && this.isDead()){
+        if (this.active && this.isDead()) {
             this.setAlive(false)
         }
     }
 
-    setAlive(live){
+    setAlive(live) {
         this.body.enable = live
         this.setVisible(live)
         this.setActive(live)
+        if (this.timer) {
+            this.timer.paused = !live
+        }
+        if(!status){
+            this.emit('died')
+        }
     }
 
     move() {

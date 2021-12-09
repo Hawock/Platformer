@@ -18,7 +18,22 @@ export default class Player extends Enemy {
             },
             origin: {x: 1, y: 0.5}
         })
+        const flyFrames = this.scene.anims.generateFrameNames('dragon', {
+            prefix: 'dragon',
+            start: 1,
+            end: 6
+        })
+        this.scene.anims.create({
+            key: 'fly',
+            frames: flyFrames,
+            frameRate: 8,
+            repeat: -1
+        })
+        this.play('fly')
     }
+
+
+
 
     move() {
         this.body.setVelocity(0)
