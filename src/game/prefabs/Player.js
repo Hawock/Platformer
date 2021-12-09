@@ -10,24 +10,30 @@ export default class Player extends Enemy {
             y:config.height / 2,
             texture:'dragon',
             frame:'dragon1',
-            velocity: 500
+            velocity: 500,
+            bullet: {
+                delay: 500,
+                texture: 'fire',
+                velocity: 750
+            },
+            origin: {x: 1, y: 0.5}
         })
+        const flyFrames = this.scene.anims.generateFrameNames('dragon', {
+            prefix: 'dragon',
+            start: 1,
+            end: 6
+        })
+        this.scene.anims.create({
+            key: 'fly',
+            frames: flyFrames,
+            frameRate: 8,
+            repeat: -1
+        })
+        this.play('fly')
     }
 
-    init(data){
-        super.init(data)
-        this.fires = new Fires(this.scene)
-        this.timer = this.scene.time.addEvent({
-            delay: 500,
-            loop: true,
-            callback: this.fire,
-            callbackScope: this
-        })
-    }
 
-    fire(){
-        this.fires.createFire(this)
-    }
+
 
     move() {
         this.body.setVelocity(0)
