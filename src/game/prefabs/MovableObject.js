@@ -1,4 +1,5 @@
 import config from '@/game/config'
+import Boom from '@/game/prefabs/Boom'
 
 export default class MovableObject extends Phaser.GameObjects.Sprite {
     constructor(data) {
@@ -39,6 +40,7 @@ export default class MovableObject extends Phaser.GameObjects.Sprite {
         }
         if(!status){
             this.emit('died')
+
         }
     }
 

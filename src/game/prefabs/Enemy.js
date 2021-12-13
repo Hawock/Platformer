@@ -19,11 +19,11 @@ export default class Enemy extends MovableObject {
             y: data.y,
             texture: 'enemy',
             frame: data.frame,
-            velocity: -200,
+            velocity: -(Phaser.Math.Between(20, 40)) * 10,
             bullet: {
                 delay: 1000,
                 texture: 'bullet',
-                velocity: -500
+                velocity: -700
             },
             origin: {x: 0, y: 0.5}
         })
@@ -33,12 +33,14 @@ export default class Enemy extends MovableObject {
         super.init(data)
         this.fires = data.fires || new Fires(this.scene)
         this.setOrigin(data.origin.x, data.origin.y)
-        this.timer = this.scene.time.addEvent({
-            delay: data.bullet.delay,
-            loop: true,
-            callback: this.fire,
-            callbackScope: this
-        })
+        if(data.fires){
+            this.timer = this.scene.time.addEvent({
+                delay: data.bullet.delay,
+                loop: true,
+                callback: this.fire,
+                callbackScope: this
+            })
+        }
         this.bullet = data.bullet
     }
 

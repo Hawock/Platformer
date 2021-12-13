@@ -32,9 +32,6 @@ export default class Player extends Enemy {
         this.play('fly')
     }
 
-
-
-
     move() {
         this.body.setVelocity(0)
         if(this.scene.cursors.left.isDown){
@@ -46,6 +43,10 @@ export default class Player extends Enemy {
             this.body.setVelocityY(-this.velocity)
         }else if(this.scene.cursors.down.isDown){
             this.body.setVelocityY(this.velocity)
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(this.scene.cursors.fire)){
+            this.fire()
         }
     }
 

@@ -6,11 +6,25 @@ export default class StartScene extends Scene {
         super({key: 'StartScene'});
     }
 
-    create() {
-        console.log('StartScene.create')
+    create(data) {
         this.createBackground()
+        if(data.score !== undefined){
+            this.createStats(data)
+        }
         this.createStartText()
         this.listenTap()
+    }
+
+    createStats(data){
+        this.add.graphics()
+            .fillStyle(0x000000, 0.5)
+            .fillRoundedRect(config.width / 2 - 200, config.height / 2 - 200, 400, 400, 15)
+        const textTitle = data.completed ? 'Уровень пройден!' : 'Game Over'
+        const textScore = `Score: ${data.score}`
+        const textStyle = {fill: '#FFFFFF', font: '40px'}
+        this.add.text(config.width / 2, 250, textTitle, textStyle).setOrigin(0.5)
+        this.add.text(config.width / 2, 350, textScore, textStyle).setOrigin(0.5)
+
     }
 
     createBackground(){
