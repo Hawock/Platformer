@@ -29,6 +29,9 @@ export default class GameScene extends Scene {
 
     create() {
         this.createBackground()
+        if(!this.sounds){
+            this.createSounds()
+        }
         this.player = new Player(this)
         this.enemies = new Enemies(this)
         this.createCompleteEvents()
@@ -36,17 +39,26 @@ export default class GameScene extends Scene {
         this.createScoreText()
     }
 
+    createSounds() {
+        this.sounds = {
+            theme: this.sound.add('theme'),
+            boom: this.sound.add('boom')
+        }
+        this.sounds.theme.play({volume: 0.05, loop: true})
+    }
+
     addOverlap(){
         this.physics.add.overlap(this.player.fires, this.enemies, this.onOverlap, undefined, this)
         this.physics.add.overlap(this.enemies.fires, this.player, this.onOverlap, undefined, this)
         this.physics.add.overlap(this.player, this.enemies, this.onOverlap, undefined, this)
-    }
+      }
 
     onOverlap(source, target){
         const enemy = [source, target].find(item => item.texture.key === 'enemy')
         if(enemy){
             ++this.score
             this.scoreText.setText(`Score: ${this.score}`)
+            this.sound.play('boom', {volume: 0.05})
             Boom.generate({scene: this, x: enemy.x, y: enemy.y})
         }
         source.setAlive(false)

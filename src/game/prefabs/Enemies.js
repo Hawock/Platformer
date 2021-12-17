@@ -6,7 +6,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
         super(scene.physics.world, scene);
         this.scene = scene
         this.fires = new Fires(this.scene)
-        this.countMax =  30
+        this.countMax =  300
         this.countCreated = 0
         this.countKilled =  0
         this.timer = this.scene.time.addEvent({

@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "core-js": "^3.19.1",
+    "file-loader": "^6.2.0",
     "phaser": "^3.55.2",
-    "vue": "^3.2.21"
+    "vue": "^3.2.21",
+    "vue-loader": "^15.9.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.15",

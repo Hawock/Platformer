@@ -8,5 +8,6 @@ module.exports = {
                 options.limit = -1
                 return options
             })
+            .end()
     }
 }
